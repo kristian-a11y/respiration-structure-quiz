@@ -69,3 +69,15 @@ function choosePathway(pathway) {
 function chooseMode(mode) {
   localStorage.setItem("mode", mode);
 }
+function startMoleculeQuiz(molecules) {
+  let index = 0;
+
+  const question = document.getElementById("question");
+
+  function showQuestion() {
+    question.textContent =
+      "Which molecule is this? " + molecules[index].name;
+  }
+
+  showQuestion();
+}
