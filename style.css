@@ -1,12 +1,13 @@
 body {
   font-family: Arial, sans-serif;
+}
+
+#menu-screen {
   text-align: center;
-  padding: 20px;
+  margin-top: 4rem;
 }
 
 button {
-  display: block;
-  margin: 10px auto;
-  padding: 10px;
-  width: 200px;
+  font-size: 1.2rem;
+  padding: 0.75rem 1.5rem;
 }
