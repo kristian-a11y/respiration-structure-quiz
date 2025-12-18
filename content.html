@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Content</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1 id="content-title"></h1>
+  <p id="content-text"></p>
+
+  <br>
+  <a href="javascript:history.back()">⬅ Back</a>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get("name");
+    const type = params.get("type");
+
+    document.getElementById("content-title").textContent =
+      name + " — " + (type === "pathway" ? "Pathway" : "Molecular Structures");
+
+    document.getElementById("content-text").textContent =
+      type === "pathway"
+        ? "This page will show the pathway diagram and steps."
+        : "This page will show molecular structures involved.";
+  </script>
+
+</body>
+</html>
