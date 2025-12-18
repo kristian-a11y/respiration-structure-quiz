@@ -2,62 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Pathway Options</title>
+  <title>Choose Mode</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <h1 id="pathway-title"></h1>
 
-  <div class="options">
-    <button onclick="goTo('pathway')">Pathway</button>
-    <button onclick="goTo('molecular')">Molecular Structures</button>
+  <div class="menu">
+    <button id="pathway-btn">Pathway</button>
+    <button id="molecule-btn">Molecular Structures</button>
   </div>
 
-  <br>
-  <a href="index.html">⬅ Back to Menu</a>
+  <a href="index.html">⬅ Back to menu</a>
 
-  <script src="script.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const pathwayName = params.get("name");
+
+    document.getElementById("pathway-title").textContent = pathwayName;
+
+    document.getElementById("pathway-btn").onclick = () => {
+      window.location.href =
+        "flowchart.html?name=" + encodeURIComponent(pathwayName);
+    };
+
+    document.getElementById("molecule-btn").onclick = () => {
+      window.location.href =
+        "quiz.html?name=" + encodeURIComponent(pathwayName);
+    };
+  </script>
+
 </body>
 </html>
-const PATHWAYS = {
-  Glycolysis: {
-    molecules: [
-      "Glucose",
-      "Glucose-6-phosphate",
-      "Fructose-6-phosphate",
-      "Fructose-1,6-bisphosphate",
-      "Pyruvate"
-    ],
-    flowchart: [
-      "Glucose",
-      "Glucose-6-phosphate",
-      "Fructose-6-phosphate",
-      "Fructose-1,6-bisphosphate",
-      "Pyruvate"
-    ]
-  },
-
-  "Citric Acid Cycle": {
-    molecules: [
-      "Citrate",
-      "Isocitrate",
-      "α-Ketoglutarate",
-      "Succinyl-CoA",
-      "Succinate",
-      "Fumarate",
-      "Malate",
-      "Oxaloacetate"
-    ],
-    flowchart: [
-      "Citrate",
-      "Isocitrate",
-      "α-Ketoglutarate",
-      "Succinyl-CoA",
-      "Succinate",
-      "Fumarate",
-      "Malate",
-      "Oxaloacetate"
-    ]
-  }
-};
