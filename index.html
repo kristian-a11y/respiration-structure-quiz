@@ -2,20 +2,52 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Respiration Structure Quiz</title>
+  <title>Metabolic Pathways App</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+  <!-- MENU SCREEN -->
   <section id="menu-screen">
-    <h1>Respiration Structure Quiz</h1>
+    <h1>Metabolic Pathways</h1>
+
+    <ul class="menu">
+      <li><a href="#" data-pathway="glycolysis">Glycolysis</a></li>
+      <li><a href="#" data-pathway="pyruvate-oxidation">Pyruvate Oxidation</a></li>
+      <li><a href="#" data-pathway="tca-cycle">Citric Acid Cycle</a></li>
+      <li><a href="#" data-pathway="electron-transport-chain">Electron Transport Chain</a></li>
+      <li><a href="#" data-pathway="oxidative-phosphorylation">Oxidative Phosphorylation</a></li>
+
+      <li><a href="#" data-pathway="gluconeogenesis">Gluconeogenesis</a></li>
+      <li><a href="#" data-pathway="glycogenesis">Glycogenesis</a></li>
+      <li><a href="#" data-pathway="glycogenolysis">Glycogenolysis</a></li>
+      <li><a href="#" data-pathway="pentose-phosphate">Pentose Phosphate Pathway</a></li>
+      <li><a href="#" data-pathway="cori-cycle">Cori Cycle</a></li>
+
+      <li><a href="#" data-pathway="beta-oxidation">Fatty Acid β-Oxidation</a></li>
+      <li><a href="#" data-pathway="fatty-acid-synthesis">Fatty Acid Synthesis</a></li>
+      <li><a href="#" data-pathway="ketogenesis">Ketogenesis</a></li>
+      <li><a href="#" data-pathway="ketolysis">Ketolysis</a></li>
+
+      <li><a href="#" data-pathway="urea-cycle">Urea Cycle</a></li>
+      <li><a href="#" data-pathway="heme-synthesis">Heme Biosynthesis</a></li>
+      <li><a href="#" data-pathway="bilirubin-metabolism">Bilirubin Metabolism</a></li>
+      <li><a href="#" data-pathway="ethanol-metabolism">Ethanol Metabolism</a></li>
+
+      <li><a href="#" data-pathway="glyoxylate-cycle">Glyoxylate Cycle</a></li>
+      <li><a href="#" data-pathway="calvin-cycle">Calvin Cycle</a></li>
+    </ul>
+
     <button id="start-btn">Start Quiz</button>
   </section>
 
+  <!-- QUIZ / CONTENT SCREEN -->
   <section id="quiz-screen" hidden>
-    <p>Quiz goes here</p>
+    <h2 id="pathway-title">Pathway</h2>
+    <p id="pathway-content">Content will load here.</p>
+    <button id="back-btn">Back to Menu</button>
   </section>
 
   <script src="script.js"></script>
 </body>
 </html>
-
