@@ -2,34 +2,41 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Choose Mode</title>
+  <title>Metabolic Pathway</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- Back to main menu -->
+<a href="index.html" style="display:block; margin-bottom:20px;">⬅ Back to all pathways</a>
+
+<!-- Pathway title -->
 <h1 id="pathway-title"></h1>
 
+<!-- Choice buttons -->
 <div class="menu">
-  <button id="pathway-btn">Pathway</button>
+  <button id="pathway-btn">Flowchart</button>
   <button id="molecule-btn">Molecular Structures</button>
 </div>
 
-<a href="index.html">⬅ Back to menu</a>
-
 <script>
+  // Get the pathway name from the URL
   const params = new URLSearchParams(window.location.search);
   const pathwayName = params.get("name");
 
-  document.getElementById("pathway-title").textContent = pathwayName;
+  // Show pathway title
+  const titleEl = document.getElementById("pathway-title");
+  titleEl.textContent = pathwayName ? pathwayName.replace(/-/g, " ") : "Unknown Pathway";
 
+  // Button actions
   document.getElementById("pathway-btn").onclick = () => {
-    window.location.href =
-      "flowchart.html?name=" + encodeURIComponent(pathwayName);
+    if (!pathwayName) return;
+    window.location.href = "flowchart.html?name=" + encodeURIComponent(pathwayName);
   };
 
   document.getElementById("molecule-btn").onclick = () => {
-    window.location.href =
-      "quiz.html?name=" + encodeURIComponent(pathwayName);
+    if (!pathwayName) return;
+    window.location.href = "quiz.html?name=" + encodeURIComponent(pathwayName);
   };
 </script>
 
