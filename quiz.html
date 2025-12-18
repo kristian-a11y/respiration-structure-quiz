@@ -18,3 +18,13 @@
 <script src="script.js"></script>
 </body>
 </html>
+<script src="script.js"></script>
+<script>
+  const pathway = localStorage.getItem("pathway");
+
+  fetch(`data/${pathway}.json`)
+    .then(response => response.json())
+    .then(data => {
+      startMoleculeQuiz(data.molecules);
+    });
+</script>
