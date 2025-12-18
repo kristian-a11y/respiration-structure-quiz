@@ -62,3 +62,10 @@ if (document.getElementById("flowchart")) {
     ul.appendChild(li);
   });
 }
+function choosePathway(pathway) {
+  localStorage.setItem("pathway", pathway);
+}
+
+function chooseMode(mode) {
+  localStorage.setItem("mode", mode);
+}
