@@ -2,44 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Metabolic Pathways App</title>
+  <title>Metabolic Pathways</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- HOME / MENU SCREEN -->
+  <!-- HOME MENU -->
   <section id="menu-screen">
     <h1>Metabolic Pathways</h1>
 
     <ul class="menu">
       <li data-pathway="Glycolysis">Glycolysis</li>
-      <li data-pathway="Pyruvate Oxidation">Pyruvate Oxidation</li>
       <li data-pathway="Citric Acid Cycle">Citric Acid Cycle</li>
       <li data-pathway="Electron Transport Chain">Electron Transport Chain</li>
       <li data-pathway="Oxidative Phosphorylation">Oxidative Phosphorylation</li>
-
-      <li data-pathway="Gluconeogenesis">Gluconeogenesis</li>
-      <li data-pathway="Glycogenesis">Glycogenesis</li>
-      <li data-pathway="Glycogenolysis">Glycogenolysis</li>
-      <li data-pathway="Pentose Phosphate Pathway">Pentose Phosphate Pathway</li>
-      <li data-pathway="Cori Cycle">Cori Cycle</li>
-
-      <li data-pathway="Fatty Acid β-Oxidation">Fatty Acid β-Oxidation</li>
-      <li data-pathway="Fatty Acid Synthesis">Fatty Acid Synthesis</li>
-      <li data-pathway="Ketogenesis">Ketogenesis</li>
-      <li data-pathway="Ketolysis">Ketolysis</li>
-
       <li data-pathway="Urea Cycle">Urea Cycle</li>
-      <li data-pathway="Heme Biosynthesis">Heme Biosynthesis</li>
-      <li data-pathway="Bilirubin Metabolism">Bilirubin Metabolism</li>
-      <li data-pathway="Ethanol Metabolism">Ethanol Metabolism</li>
-
-      <li data-pathway="Glyoxylate Cycle">Glyoxylate Cycle</li>
       <li data-pathway="Calvin Cycle">Calvin Cycle</li>
+      <!-- add the rest here -->
     </ul>
   </section>
 
-  <!-- PATHWAY OPTIONS SCREEN -->
+  <!-- OPTIONS SCREEN -->
   <section id="options-screen" hidden>
     <h2 id="selected-pathway"></h2>
 
@@ -47,16 +30,7 @@
     <button id="molecular-btn">Molecular Structures</button>
 
     <br><br>
-    <button id="back-to-menu">⬅ Back to Menu</button>
-  </section>
-
-  <!-- CONTENT SCREEN -->
-  <section id="content-screen" hidden>
-    <h2 id="content-title"></h2>
-    <p id="content-text">Content will go here.</p>
-
-    <br>
-    <button id="back-to-options">⬅ Back</button>
+    <button id="back-btn">⬅ Back</button>
   </section>
 
   <script src="script.js"></script>
