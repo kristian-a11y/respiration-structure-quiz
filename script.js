@@ -81,3 +81,12 @@ function startMoleculeQuiz(molecules) {
 
   showQuestion();
 }
+function startFlowchart(reactions) {
+  const list = document.getElementById("steps");
+
+  reactions.forEach(step => {
+    const li = document.createElement("li");
+    li.textContent = step;
+    list.appendChild(li);
+  });
+}
