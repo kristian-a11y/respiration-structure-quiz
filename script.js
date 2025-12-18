@@ -1,24 +1,13 @@
-const menuScreen = document.getElementById("menu-screen");
-const optionsScreen = document.getElementById("options-screen");
+const params = new URLSearchParams(window.location.search);
+const pathwayName = params.get("name");
 
-const selectedPathwayText = document.getElementById("selected-pathway");
-const backBtn = document.getElementById("back-btn");
+const title = document.getElementById("pathway-title");
 
-let currentPathway = "";
+if (title && pathwayName) {
+  title.textContent = pathwayName;
+}
 
-// When clicking a pathway
-document.querySelectorAll(".menu li").forEach(item => {
-  item.addEventListener("click", () => {
-    currentPathway = item.dataset.pathway;
-    selectedPathwayText.textContent = currentPathway;
-
-    menuScreen.hidden = true;
-    optionsScreen.hidden = false;
-  });
-});
-
-// Back button
-backBtn.addEventListener("click", () => {
-  optionsScreen.hidden = true;
-  menuScreen.hidden = false;
-});
+function goTo(type) {
+  window.location.href =
+    `content.html?name=${encodeURIComponent(pathwayName)}&type=${type}`;
+}
