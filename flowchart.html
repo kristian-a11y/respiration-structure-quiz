@@ -18,3 +18,15 @@
 <script src="script.js"></script>
 </body>
 </html>
+<ul id="steps"></ul>
+
+<script src="script.js"></script>
+<script>
+  const pathway = localStorage.getItem("pathway");
+
+  fetch(`data/${pathway}.json`)
+    .then(res => res.json())
+    .then(data => {
+      startFlowchart(data.reactions);
+    });
+</script>
