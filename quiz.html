@@ -4,6 +4,7 @@
   <title>Molecular Structures</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <h1 id="title"></h1>
@@ -14,18 +15,26 @@
 <button onclick="nextQuestion()">Next</button>
 <a href="javascript:history.back()">⬅ Back</a>
 
-<script src="data/pathways.js"></script>
-<script src="script.js"></script>
-</body>
-</html>
 <script src="script.js"></script>
 <script>
   const pathway = localStorage.getItem("pathway");
 
-  fetch(`data/${pathway}.json`)
-    .then(response => response.json())
-    .then(data => {
-      startMoleculeQuiz(data.molecules);
-    });
+  if (!pathway) {
+    document.getElementById("question").textContent =
+      "No pathway selected.";
+  } else {
+    fetch(`data/${pathway}.json`)
+      .then(response => response.json())
+      .then(data => {
+        startMoleculeQuiz(data.molecules);
+      })
+      .catch(error => {
+        document.getElementById("question").textContent =
+          "Error loading pathway data.";
+        console.error(error);
+      });
+  }
 </script>
-<p id="question"></p>
+
+</body>
+</html>
