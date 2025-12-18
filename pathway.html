@@ -7,34 +7,31 @@
 </head>
 <body>
 
-  <h1 id="pathway-title"></h1>
+<h1 id="pathway-title"></h1>
 
-  <div class="menu">
-    <button id="pathway-btn">Pathway</button>
-    <button id="molecule-btn">Molecular Structures</button>
-  </div>
+<div class="menu">
+  <button id="pathway-btn">Pathway</button>
+  <button id="molecule-btn">Molecular Structures</button>
+</div>
 
-  <a href="index.html">⬅ Back to menu</a>
+<a href="index.html">⬅ Back to menu</a>
 
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const pathwayName = params.get("name");
+<script>
+  const params = new URLSearchParams(window.location.search);
+  const pathwayName = params.get("name");
 
-    document.getElementById("pathway-title").textContent = pathwayName;
+  document.getElementById("pathway-title").textContent = pathwayName;
 
-    document.getElementById("pathway-btn").onclick = () => {
-      window.location.href =
-        "flowchart.html?name=" + encodeURIComponent(pathwayName);
-    };
+  document.getElementById("pathway-btn").onclick = () => {
+    window.location.href =
+      "flowchart.html?name=" + encodeURIComponent(pathwayName);
+  };
 
-    document.getElementById("molecule-btn").onclick = () => {
-      window.location.href =
-        "quiz.html?name=" + encodeURIComponent(pathwayName);
-    };
-  </script>
+  document.getElementById("molecule-btn").onclick = () => {
+    window.location.href =
+      "quiz.html?name=" + encodeURIComponent(pathwayName);
+  };
+</script>
 
 </body>
 </html>
-<button onclick="choosePathway('glycolysis')">
-  Glycolysis
-</button>
