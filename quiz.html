@@ -17,41 +17,51 @@
 
 <div id="choices"></div>
 
-<button id="nextBtn">Next</button>
+<button id="nextBtn" style="display:none;">Next</button>
 
 <!-- LOAD PATHWAY DATA -->
 <script src="data/glycolysis.js"></script>
 
 <script>
-  // 1️⃣ Get pathway name from URL
   const params = new URLSearchParams(window.location.search);
   const name = params.get("name");
 
-  // 2️⃣ Select pathway data (FOR NOW: glycolysis only)
   let pathwayData = null;
 
   if (name === "glycolysis") {
     pathwayData = glycolysis;
   }
 
-  // 3️⃣ Setup page
-  document.getElementById("title").textContent =
-    pathwayData ? pathwayData.name + " – Molecular Structures" : "Pathway not found";
+  const titleEl = document.getElementById("title");
+  const questionEl = document.getElementById("question");
+  const imgEl = document.getElementById("structure-img");
+  const choicesEl = document.getElementById("choices");
+  const nextBtn = document.getElementById("nextBtn");
+
+  // ❌ STOP if pathway not found
+  if (!pathwayData) {
+    titleEl.textContent = "Pathway not found";
+    questionEl.textContent =
+      "Please go back and select a pathway.";
+    throw new Error("Invalid pathway");
+  }
+
+  // ✅ Safe to continue
+  titleEl.textContent =
+    pathwayData.name + " – Molecular Structures";
 
   let currentIndex = 0;
 
   function showQuestion() {
     const q = pathwayData.structures[currentIndex];
 
-    document.getElementById("question").textContent = q.question;
+    questionEl.textContent = q.question;
 
-    const img = document.getElementById("structure-img");
-    img.src = q.image;
-    img.alt = q.alt;
-    img.style.display = "block";
+    imgEl.src = q.image;
+    imgEl.alt = q.alt;
+    imgEl.style.display = "block";
 
-    const choicesDiv = document.getElementById("choices");
-    choicesDiv.innerHTML = "";
+    choicesEl.innerHTML = "";
 
     q.options.forEach(option => {
       const btn = document.createElement("button");
@@ -61,27 +71,24 @@
         alert(option === q.correct ? "Correct!" : "Incorrect");
       };
 
-      choicesDiv.appendChild(btn);
+      choicesEl.appendChild(btn);
     });
+
+    nextBtn.style.display = "inline-block";
   }
 
-  document.getElementById("nextBtn").onclick = () => {
+  nextBtn.onclick = () => {
     currentIndex++;
+
     if (currentIndex < pathwayData.structures.length) {
       showQuestion();
     } else {
-      document.getElementById("question").textContent =
-        "Quiz complete!";
-      document.getElementById("choices").innerHTML = "";
-      document.getElementById("structure-img").style.display = "none";
+      questionEl.textContent = "Quiz complete!";
+      choicesEl.innerHTML = "";
+      imgEl.style.display = "none";
+      nextBtn.style.display = "none";
     }
   };
 
-  // 4️⃣ Start quiz
-  if (pathwayData) {
-    showQuestion();
-  }
-</script>
-
-</body>
-</html>
+  // ▶ Start quiz
+  showQuesti
