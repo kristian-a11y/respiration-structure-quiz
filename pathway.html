@@ -7,36 +7,46 @@
 </head>
 <body>
 
-<!-- Back to main menu -->
-<a href="index.html" style="display:block; margin-bottom:20px;">⬅ Back to all pathways</a>
+<a href="index.html" style="display:block; margin-bottom:20px;">
+  ⬅ Back to all pathways
+</a>
 
-<!-- Pathway title -->
 <h1 id="pathway-title"></h1>
+<p id="message"></p>
 
-<!-- Choice buttons -->
 <div class="menu">
   <button id="pathway-btn">Flowchart</button>
   <button id="molecule-btn">Molecular Structures</button>
 </div>
 
 <script>
-  // Get the pathway name from the URL
   const params = new URLSearchParams(window.location.search);
   const pathwayName = params.get("name");
 
-  // Show pathway title
   const titleEl = document.getElementById("pathway-title");
-  titleEl.textContent = pathwayName ? pathwayName.replace(/-/g, " ") : "Unknown Pathway";
+  const messageEl = document.getElementById("message");
+  const flowBtn = document.getElementById("pathway-btn");
+  const quizBtn = document.getElementById("molecule-btn");
 
-  // Button actions
-  document.getElementById("pathway-btn").onclick = () => {
-    if (!pathwayName) return;
-    window.location.href = "flowchart.html?name=" + encodeURIComponent(pathwayName);
+  if (!pathwayName) {
+    titleEl.textContent = "No pathway selected";
+    messageEl.textContent =
+      "Please go back and choose a metabolic pathway.";
+    flowBtn.disabled = true;
+    quizBtn.disabled = true;
+    throw new Error("No pathway name in URL");
+  }
+
+  titleEl.textContent = pathwayName.replace(/-/g, " ");
+
+  flowBtn.onclick = () => {
+    window.location.href =
+      "flowchart.html?name=" + encodeURIComponent(pathwayName);
   };
 
-  document.getElementById("molecule-btn").onclick = () => {
-    if (!pathwayName) return;
-    window.location.href = "quiz.html?name=" + encodeURIComponent(pathwayName);
+  quizBtn.onclick = () => {
+    window.location.href =
+      "quiz.html?name=" + encodeURIComponent(pathwayName);
   };
 </script>
 
