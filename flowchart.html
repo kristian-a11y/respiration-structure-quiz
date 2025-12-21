@@ -1,32 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Pathway Flowchart</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<a href="index.html">⬅ Back to pathways</a>
+
 <h1 id="title"></h1>
-<p>Put the molecules in the correct order</p>
+<p>Put the reactions in the correct order</p>
 
 <ul id="flowchart"></ul>
 
-<button onclick="checkFlowchart()">Check</button>
-<a href="javascript:history.back()">⬅ Back</a>
+<button id="checkBtn">Check order</button>
 
-<script src="data/pathways.js"></script>
-<script src="script.js"></script>
+<!-- LOAD PATHWAY DATA -->
+<script src="data/glycolysis.js"></script>
+
+<script>
+  // 1️⃣ Get pathway name from URL
+  const params = new URLSearchParams(window.location.search);
+  const name = params.get("name");
+
+  // 2️⃣ Choose correct data (FOR NOW: glycolysis only)
+  let pathwayData = null;
+
+  if (name === "glycolysis") {
+    pathwayData = glycolysis;
+  }
+
+  // 3️⃣ Set title
+  document.getElementById("title").textContent =
+    pathwayData ? pathwayData.name + " – Flowchart" : "Pathway not found";
+
+  // 4️⃣ Show steps
+  const list = document.getElementById("flowchart");
+
+  const selected = [];
+  const correctOrder = pathwayData.flowchart.map(step => step.id);
+
+  pathwayData.flowchart
+    .sort(() => Math.random() - 0.5)
+    .forEach(step => {
+      const li = document.createElement("li");
+      const btn = document.createElement("button");
+      btn.textContent = step.text;
+
+      btn.onclick = () => {
+        selected.push(step.id);
+        btn.disabled = true;
+      };
+
+      li.appendChild(btn);
+      list.appendChild(li);
+    });
+
+  // 5️⃣ Check answer
+  document.getElementById("checkBtn").onclick = () => {
+    const result =
+      JSON.stringify(selected) === JSON.stringify(correctOrder);
+
+    alert(result ? "Correct order!" : "Incorrect order");
+  };
+</script>
+
 </body>
 </html>
-<ul id="steps"></ul>
-
-<script src="script.js"></script>
-<script>
-  const pathway = localStorage.getItem("pathway");
-
-  fetch(`data/${pathway}.json`)
-    .then(res => res.json())
-    .then(data => {
-      startFlowchart(data.reactions);
-    });
-</script>
