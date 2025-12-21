@@ -1,38 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Molecular Structures</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+<a href="index.html">⬅ Back to pathways</a>
+
 <h1 id="title"></h1>
 <p id="question"></p>
 
+<img id="structure-img" alt="" width="300" style="display:none;">
+
 <div id="choices"></div>
 
-<button onclick="nextQuestion()">Next</button>
-<a href="javascript:history.back()">⬅ Back</a>
+<button id="nextBtn">Next</button>
 
-<script src="script.js"></script>
+<!-- LOAD PATHWAY DATA -->
+<script src="data/glycolysis.js"></script>
+
 <script>
-  const pathway = localStorage.getItem("pathway");
+  // 1️⃣ Get pathway name from URL
+  const params = new URLSearchParams(window.location.search);
+  const name = params.get("name");
 
-  if (!pathway) {
-    document.getElementById("question").textContent =
-      "No pathway selected.";
-  } else {
-    fetch(`data/${pathway}.json`)
-      .then(response => response.json())
-      .then(data => {
-        startMoleculeQuiz(data.molecules);
-      })
-      .catch(error => {
-        document.getElementById("question").textContent =
-          "Error loading pathway data.";
-        console.error(error);
-      });
+  // 2️⃣ Select pathway data (FOR NOW: glycolysis only)
+  let pathwayData = null;
+
+  if (name === "glycolysis") {
+    pathwayData = glycolysis;
+  }
+
+  // 3️⃣ Setup page
+  document.getElementById("title").textContent =
+    pathwayData ? pathwayData.name + " – Molecular Structures" : "Pathway not found";
+
+  let currentIndex = 0;
+
+  function showQuestion() {
+    const q = pathwayData.structures[currentIndex];
+
+    document.getElementById("question").textContent = q.question;
+
+    const img = document.getElementById("structure-img");
+    img.src = q.image;
+    img.alt = q.alt;
+    img.style.display = "block";
+
+    const choicesDiv = document.getElementById("choices");
+    choicesDiv.innerHTML = "";
+
+    q.options.forEach(option => {
+      const btn = document.createElement("button");
+      btn.textContent = option;
+
+      btn.onclick = () => {
+        alert(option === q.correct ? "Correct!" : "Incorrect");
+      };
+
+      choicesDiv.appendChild(btn);
+    });
+  }
+
+  document.getElementById("nextBtn").onclick = () => {
+    currentIndex++;
+    if (currentIndex < pathwayData.structures.length) {
+      showQuestion();
+    } else {
+      document.getElementById("question").textContent =
+        "Quiz complete!";
+      document.getElementById("choices").innerHTML = "";
+      document.getElementById("structure-img").style.display = "none";
+    }
+  };
+
+  // 4️⃣ Start quiz
+  if (pathwayData) {
+    showQuestion();
   }
 </script>
 
