@@ -10,33 +10,41 @@
 <a href="index.html">⬅ Back to pathways</a>
 
 <h1 id="title"></h1>
-<p>Put the reactions in the correct order</p>
+<p id="instruction"></p>
 
 <ul id="flowchart"></ul>
 
-<button id="checkBtn">Check order</button>
+<button id="checkBtn" style="display:none;">Check order</button>
 
 <!-- LOAD PATHWAY DATA -->
 <script src="data/glycolysis.js"></script>
 
 <script>
-  // 1️⃣ Get pathway name from URL
   const params = new URLSearchParams(window.location.search);
   const name = params.get("name");
 
-  // 2️⃣ Choose correct data (FOR NOW: glycolysis only)
   let pathwayData = null;
 
   if (name === "glycolysis") {
     pathwayData = glycolysis;
   }
 
-  // 3️⃣ Set title
-  document.getElementById("title").textContent =
-    pathwayData ? pathwayData.name + " – Flowchart" : "Pathway not found";
+  // ❌ STOP if pathway not found
+  if (!pathwayData) {
+    document.getElementById("title").textContent = "Pathway not found";
+    document.getElementById("instruction").textContent =
+      "Please go back and select a pathway.";
+    throw new Error("Invalid pathway");
+  }
 
-  // 4️⃣ Show steps
+  // ✅ Safe to continue
+  document.getElementById("title").textContent =
+    pathwayData.name + " – Flowchart";
+  document.getElementById("instruction").textContent =
+    "Click the reactions in the correct order";
+
   const list = document.getElementById("flowchart");
+  const checkBtn = document.getElementById("checkBtn");
 
   const selected = [];
   const correctOrder = pathwayData.flowchart.map(step => step.id);
@@ -57,12 +65,13 @@
       list.appendChild(li);
     });
 
-  // 5️⃣ Check answer
-  document.getElementById("checkBtn").onclick = () => {
-    const result =
+  checkBtn.style.display = "inline-block";
+
+  checkBtn.onclick = () => {
+    const correct =
       JSON.stringify(selected) === JSON.stringify(correctOrder);
 
-    alert(result ? "Correct order!" : "Incorrect order");
+    alert(correct ? "Correct order!" : "Incorrect order");
   };
 </script>
 
